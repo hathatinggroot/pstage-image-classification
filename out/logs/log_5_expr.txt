@@ -1,0 +1,11 @@
+
+[2021-08-25 02:31:06.084544]	epoch:[0] loss:[1.334] train_accr:[0.719] test_accr:[0.010].
+[2021-08-25 02:34:44.953569]	epoch:[1] loss:[0.803] train_accr:[0.749] test_accr:[0.010].
+[2021-08-25 02:38:22.525676]	epoch:[2] loss:[0.608] train_accr:[0.584] test_accr:[0.010].
+[2021-08-25 02:42:21.525418]	epoch:[3] loss:[0.487] train_accr:[0.693] test_accr:[0.010].
+[2021-08-25 02:46:10.820512]	epoch:[4] loss:[0.403] train_accr:[0.846] test_accr:[0.010].
+[2021-08-25 02:50:00.749568]	epoch:[5] loss:[0.345] train_accr:[0.851] test_accr:[0.010].
+[2021-08-25 02:53:49.363825]	epoch:[6] loss:[0.310] train_accr:[0.900] test_accr:[0.010].
+[2021-08-25 02:57:36.198133]	epoch:[7] loss:[0.272] train_accr:[0.880] test_accr:[0.010].
+[2021-08-25 03:01:26.664489]	epoch:[8] loss:[0.222] train_accr:[0.919] test_accr:[0.010].
+[2021-08-25 03:05:14.195313]	epoch:[9] loss:[0.191] train_accr:[0.894] test_accr:[0.010].

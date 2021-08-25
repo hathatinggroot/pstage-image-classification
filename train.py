@@ -34,7 +34,7 @@ trainProps = {
     'loss_fn' : nn.CrossEntropyLoss(),
     'optimzier' : torch.optim.Adam(model.parameters(), hparams['lr']),
     'data' : D.train_img_iter_numworker_batch,
-    'name' : '4_expr'
+    'name' : '6_expr'
 }
 
 def func_eval(model,data_iter,device):

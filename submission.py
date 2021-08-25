@@ -22,16 +22,11 @@ out_dir = '/opt/ml/code/out/submission'
 def submission(try_cnt: int):
     submission = pd.read_csv(os.path.join(test_dir, 'info.csv'))
     image_dir = os.path.join(test_dir, 'images')
-    model_path = os.path.join(model_dir, 'ResNet_2021-08-25_02:05:36.516538.pt')
+    model_path = os.path.join(model_dir, 'ResNet_2021-08-25_06:54:14.024181.pt')
 
     # Test Dataset 클래스 객체를 생성하고 DataLoader를 만듭니다.
     image_paths = [os.path.join(image_dir, img_id) for img_id in submission.ImageID]
-    transform = transforms.Compose([
-        Resize((512, 384), Image.BILINEAR),
-        ToTensor(),
-        Normalize(mean=(0.5, 0.5, 0.5), std=(0.2, 0.2, 0.2)),
-    ])
-    dataset = D.TestDataset(image_paths, transform)
+    dataset = D.TestDataset(image_paths)
 
     loader = DataLoader(
         dataset,
@@ -61,4 +56,4 @@ def submission(try_cnt: int):
     print('test inference is done!')
 
 if __name__ == '__main__':
-    submission(2)
+    submission(4)

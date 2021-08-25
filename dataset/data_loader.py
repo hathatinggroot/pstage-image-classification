@@ -23,11 +23,12 @@ train_img_sub_dirs = [os.path.join(train_img_dir, sub_dir) for sub_dir in os.lis
 default_img_paths = np.array([[os.path.join(sub_dir, img) for img in os.listdir(sub_dir) if not img.startswith('.')]  for sub_dir in train_img_sub_dirs]).flatten()
 
 default_transforms = transforms.Compose([
-    transforms.ToTensor()
+    transforms.ToTensor(),
+    Normalize(mean=(0.5, 0.5, 0.5), std=(0.2, 0.2, 0.2)),
 ])
 
 class TestDataset(Dataset):
-    def __init__(self, img_paths, transform):
+    def __init__(self, img_paths, transform=default_transforms):
         self.img_paths = img_paths
         self.transform = transform
 
@@ -40,6 +41,20 @@ class TestDataset(Dataset):
 
     def __len__(self):
         return len(self.img_paths)
+
+class ImbalanceDataset(Dataset):
+    def __init__(self) -> None:
+        super().__init__()
+        self.imbalanced_img_paths = list(filter(lambda p: ('incorrect' in p) or ('normal' in p), default_img_paths))
+
+    def __getitem__(self, index):
+        img_path = self.imbalanced_img_paths[index]
+        image = Image.open(img_path)
+        return image, img_path
+    
+    def __len__(self):
+        return len(self.imbalanced_img_paths)
+
 
 class TrainDataset(Dataset):
     def __init__(self, img_paths=default_img_paths, transforms=default_transforms):
@@ -95,6 +110,7 @@ train_img_iter_basic = DataLoader(train_set)
 train_img_iter_batch = DataLoader(train_set,
                            batch_size=100
                            )
+        
 train_img_iter_numworker = DataLoader(train_set,
                            num_workers=3
                            )
@@ -103,3 +119,7 @@ train_img_iter_numworker_batch = DataLoader(train_set,
                             num_workers=2
                            )
 
+imbal_set = ImbalanceDataset()
+imbal_img_iter_numworker = DataLoader(imbal_set,
+                            num_workers=2
+                           )
