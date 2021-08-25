@@ -26,6 +26,21 @@ default_transforms = transforms.Compose([
     transforms.ToTensor()
 ])
 
+class TestDataset(Dataset):
+    def __init__(self, img_paths, transform):
+        self.img_paths = img_paths
+        self.transform = transform
+
+    def __getitem__(self, index):
+        image = Image.open(self.img_paths[index])
+
+        if self.transform:
+            image = self.transform(image)
+        return image
+
+    def __len__(self):
+        return len(self.img_paths)
+
 class TrainDataset(Dataset):
     def __init__(self, img_paths=default_img_paths, transforms=default_transforms):
         self.train_info = pd.read_csv(os.path.join(train_dir, 'train.csv'))
@@ -84,6 +99,7 @@ train_img_iter_numworker = DataLoader(train_set,
                            num_workers=3
                            )
 train_img_iter_numworker_batch = DataLoader(train_set,
-                            batch_size=100,
-                            num_workers=3
+                            batch_size=20,
+                            num_workers=2
                            )
+

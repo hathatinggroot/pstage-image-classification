@@ -1,5 +1,7 @@
 import torch
 import torch.nn as nn
+import torchvision
+import numpy as np
 
 class MyModel(nn.Module):
     def __init__(self, num_classes: int = 18):
@@ -25,5 +27,19 @@ class MyModel(nn.Module):
 
         return x
 
-def trigg():
-    print("hello im from model.py")
+MyResnet18 = torchvision.models.resnet18(pretrained=True)
+MyResnet18.fc = nn.Linear(in_features=512, out_features=18, bias=True)
+
+MyResnet101 = torchvision.models.resnet101(pretrained=True)
+MyResnet101.fc = nn.Linear(in_features=512, out_features=18, bias=True)
+
+
+def get_model():
+    MyResnet34 = torchvision.models.resnet34(pretrained=True)
+    MyResnet34.fc = nn.Linear(in_features=512, out_features=18, bias=True)
+    nn.init.xavier_uniform_(MyResnet34.fc.weight)
+    stdv = 1/np.sqrt(512)
+    MyResnet34.fc.bias.data.uniform_(-stdv, stdv)
+    
+    return MyResnet34
+
