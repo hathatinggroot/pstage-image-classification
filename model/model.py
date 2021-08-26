@@ -34,9 +34,15 @@ MyResnet101 = torchvision.models.resnet101(pretrained=True)
 MyResnet101.fc = nn.Linear(in_features=512, out_features=18, bias=True)
 
 
-def get_model():
+def get_model(cat=None):
+    of = 18
+    if cat == 'mask' or cat == 'age':
+        of = 3
+    elif cat == 'gender':
+        of = 2
+    print(f'of: {of}')
     MyResnet34 = torchvision.models.resnet34(pretrained=True)
-    MyResnet34.fc = nn.Linear(in_features=512, out_features=18, bias=True)
+    MyResnet34.fc = nn.Linear(in_features=512, out_features=of, bias=True)
     nn.init.xavier_uniform_(MyResnet34.fc.weight)
     stdv = 1/np.sqrt(512)
     MyResnet34.fc.bias.data.uniform_(-stdv, stdv)

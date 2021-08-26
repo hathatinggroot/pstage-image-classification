@@ -1,4 +1,6 @@
 
+import os
+from typing import Counter
 import numpy as np
 
 import torch
@@ -19,22 +21,23 @@ from metric.metric import log, save_model
 
 
 
+
+
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 # model = M.MyModel()
-model = M.get_model()
+# model = M.get_model(3)
 
 hparams = {
-    'lr' : 1e-3,
+    'lr' : 1e-2,
     'EPOCHs' : 10,
     'EPOCH_EVERY' : 1
 }
 
 trainProps = {
-    'model' : model.to(device),
+    # 'model' : model.to(device),
     'loss_fn' : nn.CrossEntropyLoss(),
-    'optimzier' : torch.optim.Adam(model.parameters(), hparams['lr']),
-    'data' : D.train_img_iter_numworker_batch,
-    'name' : '6_expr'
+    'optimzier' : torch.optim.Adam,
+    # 'data' : D.mask_train_img_iter_numworker_batch
 }
 
 def func_eval(model,data_iter,device):
@@ -42,7 +45,7 @@ def func_eval(model,data_iter,device):
     with torch.no_grad():
         n_total,n_correct = 0,0
         model.eval() # evaluate (affects DropOut and BN)
-        for batch_in,batch_out in tqdm(data_iter):
+        for i, (batch_in,batch_out) in enumerate(tqdm(data_iter)):
             y_trgt = batch_out.to(device)
             model_pred = model.forward(batch_in.to(device))
             _,y_pred = torch.max(model_pred,1)
@@ -55,12 +58,18 @@ def func_eval(model,data_iter,device):
     return val_accr
 
 
-def train():
+def train(expr_name, data=D.train_img_iter_numworker_batch, cat=None, pretrained=None):
     print ("Start training.")
-    _, EPOCHs, EPOCH_EVERY = hparams.values()
+    lr, EPOCHs, EPOCH_EVERY = hparams.values()
     
-    model, loss_fn, optimizer, data, expr_name = trainProps.values()
+    # _, loss_fn, optimizer, _ = trainProps.values()
+    loss_fn, optimizer = trainProps.values()
+    model = M.get_model(cat).to(device)
+    if pretrained:
+        model.load_state_dict(pretrained)
+
     model.train()
+    optimizer = optimizer(model.parameters(), lr=lr)
 
     for epoch in range(EPOCHs):
         loss_val_sum = 0
@@ -88,13 +97,19 @@ def train():
             msg = "epoch:[%d] loss:[%.3f] train_accr:[%.3f] test_accr:[%.3f]."%(epoch,loss_val_avg,train_accr,test_accr)
             log(expr_name, msg)
             print (msg)
-            save_model(model)
+            save_model(model, cat)
     
     print ("Done")
 
 
 def main():
-    train()
+    # train('expr_7_mask', D.mask_train_img_iter_numworker_batch, 'mask')
+    model_dir = '/opt/ml/code/out/models'
+    age_pretrained = torch.load(os.path.join(model_dir, 'age', 'ResNet_2021-08-25_14:26:58.313473.pt')) 
+    train('expr_7_age', D.age_train_img_iter_numworker_batch, 'age')
+    gen_pretrained = torch.load(os.path.join(model_dir, 'gender', 'ResNet_2021-08-25_15:13:27.042853.pt')) 
+    train('expr_7_gender', D.gender_train_img_iter_numworker_batch, 'gender')
+    
     # log('tester', 'this is test')
     # save_model()
 

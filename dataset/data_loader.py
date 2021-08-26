@@ -42,18 +42,6 @@ class TestDataset(Dataset):
     def __len__(self):
         return len(self.img_paths)
 
-class ImbalanceDataset(Dataset):
-    def __init__(self) -> None:
-        super().__init__()
-        self.imbalanced_img_paths = list(filter(lambda p: ('incorrect' in p) or ('normal' in p), default_img_paths))
-
-    def __getitem__(self, index):
-        img_path = self.imbalanced_img_paths[index]
-        image = Image.open(img_path)
-        return image, img_path
-    
-    def __len__(self):
-        return len(self.imbalanced_img_paths)
 
 
 class TrainDataset(Dataset):
@@ -104,6 +92,39 @@ class TrainDataset(Dataset):
         X, y = self[idx]
         return f'[{self.__class__.__name__}]\n\t length : {len(self)} \n\t y : {y} \n\t X.shape : {X.shape} \n\t X : \n{X}'
 
+class MaskTrainSet(TrainDataset):
+    def __init__(self, img_paths=default_img_paths, transforms=default_transforms):
+        super().__init__(img_paths=img_paths, transforms=transforms)
+    
+    def _toY(self, person, mask_label):
+        mask_weight = 0
+        if mask_label.startswith('incorrect'):
+            mask_weight += 1
+        elif mask_label.startswith('normal'):
+            mask_weight += 2
+        return mask_weight
+
+class AgeTrainSet(TrainDataset):
+    def __init__(self, img_paths=default_img_paths, transforms=default_transforms):
+        super().__init__(img_paths=img_paths, transforms=transforms)
+        age = self.train_info.age
+        weight = ((age >= 30) & (age < 60))*1
+        weight += (age >= 60)*2
+        self.train_info['age'] = weight
+    
+    def _toY(self, person, mask_label):
+        age = self.train_info.query(f"path == '{person}'")['age'].values[0]
+        return age
+
+class GenderTrainSet(TrainDataset):
+    def __init__(self, img_paths=default_img_paths, transforms=default_transforms):
+        super().__init__(img_paths=img_paths, transforms=transforms)
+        self.train_info['gender'] = self.train_info.gender.map({'female': 1, 'male': 0})
+    
+    def _toY(self, person, mask_label):
+        gender = self.train_info.query(f"path == '{person}'")['gender'].values[0]
+        return gender
+        
 
 train_set = TrainDataset()
 train_img_iter_basic = DataLoader(train_set)
@@ -119,7 +140,16 @@ train_img_iter_numworker_batch = DataLoader(train_set,
                             num_workers=2
                            )
 
-imbal_set = ImbalanceDataset()
-imbal_img_iter_numworker = DataLoader(imbal_set,
+mask_train_img_iter_numworker_batch = DataLoader(MaskTrainSet(),
+                            batch_size=20,
                             num_workers=2
                            )
+
+gender_train_img_iter_numworker_batch = DataLoader(GenderTrainSet(),
+                            batch_size=20,
+                            num_workers=2
+                           )
+age_train_img_iter_numworker_batch = DataLoader(AgeTrainSet(),
+                            batch_size=20,
+                            num_workers=2
+                            )
