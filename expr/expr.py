@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 from trainer.trainer import BaseTrainer
-from dataset.data_loader import train_img_iter_numworker_batch
+from data.data_loader import train_img_iter_numworker_batch
 from model.modeler import getModel
 
 
@@ -32,3 +32,19 @@ class Expr_A(BaseExpr):
             epochs=1
         )
 
+class Expr_B(BaseExpr):
+    def __init__(self) -> None:
+        super().__init__()
+
+        model = getModel('MyResnet50')(num_classes=18)()
+        lr = 1e-3
+
+        self.trainer = BaseTrainer(
+            expr_name='Expr_B',
+            data_loader=train_img_iter_numworker_batch,
+            model=model,
+            optim=torch.optim.Adam(model.parameters(), lr=lr),
+            loss_fn=nn.CrossEntropyLoss(),
+            lr=lr,
+            epochs=1
+        )

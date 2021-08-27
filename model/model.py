@@ -48,3 +48,16 @@ class MyResnet34(ModelProvider):
 
         return model
 
+
+class MyResnet50(ModelProvider):
+    def __init__(self, num_classes: int) -> None:
+        super().__init__(num_classes)
+
+    def __call__(self) -> nn.Module:
+        model = torchvision.models.resnet50(pretrained=True)
+        model.fc = nn.Linear(in_features=2048, out_features=self.num_classes, bias=True)
+        nn.init.xavier_uniform_(model.fc.weight)
+        stdv = 1/np.sqrt(2048)
+        model.fc.bias.data.uniform_(-stdv, stdv)
+
+        return model

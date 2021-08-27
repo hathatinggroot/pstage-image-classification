@@ -33,7 +33,7 @@ class BaseTrainer:
                 logits = self.model(inputs)
                 _, y_hat = torch.max(logits, 1)
                 loss_out = self.loss_fn(logits, labels.type(torch.LongTensor).to(self.device))
-
+                
                 # hook
                 self.optimizerHook(self.optim, loss_out)
 

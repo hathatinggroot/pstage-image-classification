@@ -1,0 +1,23 @@
+
+[2021-08-27 00:25:24.491667+09:00]	[expr_A]Start training....
+[2021-08-27 00:25:24.491872+09:00]	
+[expr_A Info]
+	 - DataLoader : DataLoader
+	 - Model : ResNet
+	 - Optimizer : Adam
+	 - Loss_fn : CrossEntropyLoss
+	 - LearningRate : 0.01
+	 - Epochs : 1
+----------
+[2021-08-27 00:25:26.782531+09:00]	epoch:[0] loss:[0.010] train_accr:[0.100] test_accr:[0.010].
+[2021-08-27 00:25:36.973593+09:00]	[expr_A]End training....
+[2021-08-27 00:27:02.454811+09:00]	[expr_A]Start training....
+[2021-08-27 00:27:02.455046+09:00]	
+[expr_A Info]
+	 - DataLoader : DataLoader
+	 - Model : ResNet
+	 - Optimizer : Adam
+	 - Loss_fn : CrossEntropyLoss
+	 - LearningRate : 0.01
+	 - Epochs : 1
+----------

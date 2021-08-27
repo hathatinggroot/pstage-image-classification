@@ -18,7 +18,7 @@ def log(title: str, msg: str):
 def defaultAfterEpochHook(trainer, epoch, **kwargs):
     PrintEvery = 1
     if ((epoch%PrintEvery)==0) or (epoch==(trainer.epochs-1)):
-        train_accr = func_eval(trainer.model,trainer.data_loader, trainer.device)
+        train_accr = func_eval(trainer.model, trainer.data_loader, trainer.device)
         
         # FIXME
         # test_accr = func_eval(model,data,device)

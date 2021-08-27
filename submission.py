@@ -10,7 +10,7 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 from torchvision.transforms import Resize, ToTensor, Normalize
 
-import dataset.data_loader as D
+import data.data_loader as D
 import model.model as M
 from tqdm.auto import tqdm
 
