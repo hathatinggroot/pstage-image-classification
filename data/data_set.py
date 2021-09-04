@@ -37,6 +37,26 @@ class TestDataset(Dataset):
     def __len__(self):
         return len(self.img_paths)
 
+class MergedTrainDataSet(Dataset):
+    def __init__(self, img_paths=default_img_paths, transforms=default_transforms):
+        self.train_info = pd.read_csv(os.path.join(trainDataDir, 'train_info_merged.csv'))
+        
+        self.img_paths = img_paths
+        self.transforms = transforms
+
+    def __getitem__(self, index):
+        img_path = self.img_paths[index]
+        image = Image.open(img_path)
+        
+        if self.transforms:
+            image = self.transforms(image)
+
+        y = self.train_info[self.train_info.fullpath == img_path].agg_label.values[-1]
+        return image, y
+
+    def __len__(self):
+        return len(self.img_paths)
+
 
 class TrainDataset(Dataset):
     def __init__(self, img_paths=default_img_paths, transforms=default_transforms):

@@ -1,0 +1,30 @@
+
+[2021-08-29 20:43:59.208823+09:00]	[Expr_AMP_Basic_More]Start training....
+[2021-08-29 20:43:59.209039+09:00]	
+[Expr_AMP_Basic_More Info]
+	 - DataLoader : DataLoader
+	 - Model : ResNet
+	 - Optimizer : Adam
+	 - Loss_fn : CrossEntropyLoss
+	 - LearningRate : 0.001
+	 - Epochs : 5
+----------
+[2021-08-29 20:48:00.511970+09:00]	epoch:[0] loss:[0.671] train_accr:[0.778]
+[2021-08-29 20:52:02.002643+09:00]	epoch:[1] loss:[0.587] train_accr:[0.822]
+[2021-08-29 20:56:14.206041+09:00]	epoch:[2] loss:[0.519] train_accr:[0.806]
+[2021-08-29 20:59:23.905200+09:00]	[Expr_AMP_Basic_More]Start training....
+[2021-08-29 20:59:23.905413+09:00]	
+[Expr_AMP_Basic_More Info]
+	 - DataLoader : DataLoader
+	 - Model : ResNet
+	 - Optimizer : Adam
+	 - Loss_fn : CrossEntropyLoss
+	 - LearningRate : 0.001
+	 - Epochs : 5
+----------
+[2021-08-29 21:03:26.874349+09:00]	epoch:[0] loss:[0.667] train_accr:[0.804]
+[2021-08-29 21:07:28.197301+09:00]	epoch:[1] loss:[0.576] train_accr:[0.749]
+[2021-08-29 21:11:39.695123+09:00]	epoch:[2] loss:[0.513] train_accr:[0.801]
+[2021-08-29 21:15:41.189710+09:00]	epoch:[3] loss:[0.453] train_accr:[0.799]
+[2021-08-29 21:19:53.426346+09:00]	epoch:[4] loss:[0.417] train_accr:[0.792]
+[2021-08-29 21:20:03.655451+09:00]	[Expr_AMP_Basic_More]End training....

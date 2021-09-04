@@ -1,0 +1,38 @@
+
+[2021-08-30 15:31:40.649272+09:00]	[Expr_Focal_Loss_Folded_Relay]Start training....
+[2021-08-30 15:31:40.649515+09:00]	
+[Expr_Focal_Loss_Folded_Relay Info]
+	 - DataLoader : DataLoader
+	 - Model : ResNet
+	 - Optimizer : Adam
+	 - Loss_fn : FocalLoss
+	 - LearningRate : 0.001
+	 - Epochs : 10
+----------
+[2021-08-30 15:35:13.980504+09:00]	epoch:[0] loss:[0.279] train_accr:[0.652] valid_accr:[0.614] f1_score:[0.950]
+[2021-08-30 15:38:57.656871+09:00]	epoch:[1] loss:[0.258] train_accr:[0.758] valid_accr:[0.700] f1_score:[1.000]
+[2021-08-30 15:42:29.692546+09:00]	epoch:[2] loss:[0.216] train_accr:[0.874] valid_accr:[0.802] f1_score:[1.000]
+[2021-08-30 15:46:13.642004+09:00]	epoch:[3] loss:[0.184] train_accr:[0.866] valid_accr:[0.797] f1_score:[1.000]
+[2021-08-30 15:49:56.167152+09:00]	epoch:[4] loss:[0.171] train_accr:[0.891] valid_accr:[0.843] f1_score:[0.950]
+[2021-08-30 15:53:38.896683+09:00]	epoch:[5] loss:[0.158] train_accr:[0.801] valid_accr:[0.738] f1_score:[1.000]
+[2021-08-30 15:54:54.280829+09:00]	[Expr_Focal_Loss_Folded_Relay]Start training....
+[2021-08-30 15:54:54.281894+09:00]	
+[Expr_Focal_Loss_Folded_Relay Info]
+	 - DataLoader : DataLoader
+	 - Model : ResNet
+	 - Optimizer : Adam
+	 - Loss_fn : FocalLoss
+	 - LearningRate : 0.001
+	 - Epochs : 10
+----------
+[2021-08-30 15:58:26.548545+09:00]	epoch:[0] loss:[0.285] train_accr:[0.841] valid_accr:[0.791] f1_score:[1.000]
+[2021-08-30 16:02:08.889481+09:00]	epoch:[1] loss:[0.256] train_accr:[0.795] valid_accr:[0.745] f1_score:[1.000]
+[2021-08-30 16:05:41.109941+09:00]	epoch:[2] loss:[0.219] train_accr:[0.759] valid_accr:[0.720] f1_score:[1.000]
+[2021-08-30 16:09:23.962102+09:00]	epoch:[3] loss:[0.170] train_accr:[0.859] valid_accr:[0.786] f1_score:[1.000]
+[2021-08-30 16:13:16.925685+09:00]	epoch:[4] loss:[0.161] train_accr:[0.909] valid_accr:[0.849] f1_score:[1.000]
+[2021-08-30 16:16:52.726825+09:00]	epoch:[5] loss:[0.136] train_accr:[0.914] valid_accr:[0.848] f1_score:[1.000]
+[2021-08-30 16:20:36.213696+09:00]	epoch:[6] loss:[0.120] train_accr:[0.850] valid_accr:[0.766] f1_score:[0.810]
+[2021-08-30 16:24:10.348792+09:00]	epoch:[7] loss:[0.113] train_accr:[0.938] valid_accr:[0.851] f1_score:[1.000]
+[2021-08-30 16:27:46.306079+09:00]	epoch:[8] loss:[0.118] train_accr:[0.931] valid_accr:[0.845] f1_score:[1.000]
+[2021-08-30 16:31:22.696461+09:00]	epoch:[9] loss:[0.067] train_accr:[0.931] valid_accr:[0.848] f1_score:[0.849]
+[2021-08-30 16:31:22.916489+09:00]	[Expr_Focal_Loss_Folded_Relay]End training....

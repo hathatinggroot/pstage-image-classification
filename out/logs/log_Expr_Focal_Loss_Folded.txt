@@ -1,0 +1,32 @@
+
+[2021-08-30 14:32:04.112657+09:00]	[Expr_Focal_Loss_Folded]Start training....
+[2021-08-30 14:32:04.112873+09:00]	
+[Expr_Focal_Loss_Folded Info]
+	 - DataLoader : DataLoader
+	 - Model : ResNet
+	 - Optimizer : Adam
+	 - Loss_fn : FocalLoss
+	 - LearningRate : 0.001
+	 - Epochs : 10
+----------
+[2021-08-30 14:40:51.726316+09:00]	[Expr_Focal_Loss_Folded]Start training....
+[2021-08-30 14:40:51.727278+09:00]	
+[Expr_Focal_Loss_Folded Info]
+	 - DataLoader : DataLoader
+	 - Model : ResNet
+	 - Optimizer : Adam
+	 - Loss_fn : FocalLoss
+	 - LearningRate : 0.001
+	 - Epochs : 10
+----------
+[2021-08-30 14:44:23.708664+09:00]	epoch:[0] loss:[1.508] train_accr:[0.659] valid_accr:[0.599] f1_score:[0.500]
+[2021-08-30 14:48:05.369227+09:00]	epoch:[1] loss:[1.094] train_accr:[0.710] valid_accr:[0.683] f1_score:[0.550]
+[2021-08-30 14:51:38.071393+09:00]	epoch:[2] loss:[0.861] train_accr:[0.760] valid_accr:[0.740] f1_score:[0.650]
+[2021-08-30 14:55:11.020185+09:00]	epoch:[3] loss:[0.710] train_accr:[0.680] valid_accr:[0.676] f1_score:[0.850]
+[2021-08-30 14:58:54.684642+09:00]	epoch:[4] loss:[0.610] train_accr:[0.771] valid_accr:[0.746] f1_score:[1.000]
+[2021-08-30 15:02:40.507107+09:00]	epoch:[5] loss:[0.521] train_accr:[0.643] valid_accr:[0.630] f1_score:[1.000]
+[2021-08-30 15:06:25.475098+09:00]	epoch:[6] loss:[0.455] train_accr:[0.691] valid_accr:[0.675] f1_score:[1.000]
+[2021-08-30 15:10:00.429469+09:00]	epoch:[7] loss:[0.404] train_accr:[0.683] valid_accr:[0.659] f1_score:[1.000]
+[2021-08-30 15:13:35.405748+09:00]	epoch:[8] loss:[0.362] train_accr:[0.682] valid_accr:[0.645] f1_score:[1.000]
+[2021-08-30 15:17:11.568371+09:00]	epoch:[9] loss:[0.316] train_accr:[0.805] valid_accr:[0.763] f1_score:[1.000]
+[2021-08-30 15:17:11.770585+09:00]	[Expr_Focal_Loss_Folded]End training....

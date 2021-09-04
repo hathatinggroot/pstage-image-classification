@@ -1,0 +1,41 @@
+
+[2021-08-30 10:44:15.228497+09:00]	[Expr_F1_Loss]Start training....
+[2021-08-30 10:44:15.228719+09:00]	
+[Expr_F1_Loss Info]
+	 - DataLoader : DataLoader
+	 - Model : ResNet
+	 - Optimizer : Adam
+	 - Loss_fn : F1_Loss
+	 - LearningRate : 0.001
+	 - Epochs : 5
+----------
+[2021-08-30 10:51:47.632794+09:00]	[Expr_F1_Loss]Start training....
+[2021-08-30 10:51:47.633004+09:00]	
+[Expr_F1_Loss Info]
+	 - DataLoader : DataLoader
+	 - Model : ResNet
+	 - Optimizer : Adam
+	 - Loss_fn : F1_Loss
+	 - LearningRate : 0.001
+	 - Epochs : 5
+----------
+[2021-08-30 10:55:51.628690+09:00]	epoch:[0] loss:[0.957] train_accr:[0.199]
+[2021-08-30 10:59:54.994058+09:00]	epoch:[1] loss:[0.942] train_accr:[0.083]
+[2021-08-30 11:04:08.110399+09:00]	epoch:[2] loss:[0.924] train_accr:[0.279]
+[2021-08-30 11:08:11.949495+09:00]	epoch:[3] loss:[0.927] train_accr:[0.354]
+[2021-08-30 11:11:26.674378+09:00]	[Expr_F1_Loss]Start training....
+[2021-08-30 11:11:26.676086+09:00]	
+[Expr_F1_Loss Info]
+	 - DataLoader : DataLoader
+	 - Model : ResNet
+	 - Optimizer : Adam
+	 - Loss_fn : F1_Loss
+	 - LearningRate : 0.001
+	 - Epochs : 5
+----------
+[2021-08-30 11:15:29.475729+09:00]	epoch:[0] loss:[0.951] train_accr:[0.212]
+[2021-08-30 11:19:34.221957+09:00]	epoch:[1] loss:[0.930] train_accr:[0.311]
+[2021-08-30 11:23:48.286333+09:00]	epoch:[2] loss:[0.941] train_accr:[0.141]
+[2021-08-30 11:27:52.850373+09:00]	epoch:[3] loss:[0.949] train_accr:[0.123]
+[2021-08-30 11:31:58.103121+09:00]	epoch:[4] loss:[0.926] train_accr:[0.243]
+[2021-08-30 11:32:08.326860+09:00]	[Expr_F1_Loss]End training....

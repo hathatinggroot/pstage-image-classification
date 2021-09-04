@@ -5,40 +5,38 @@ from PIL import Image
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.utils.data import Dataset, DataLoader
 
 from torchvision import transforms
 from torchvision.transforms import Resize, ToTensor, Normalize
-
-import data.data_loader as D
-import model.model as M
 from tqdm.auto import tqdm
+import datetime
+from pytz import timezone
+
+from data.data_loader import get_loader
+from data.data_set import TestDataset
+import model.model as M
+from model.modeler import loadWithCheckpoint, getModel
+from config import testDataDir, outModelsDir, outSubmissionDir
 
 
-test_dir = '/opt/ml/input/data/eval'
-model_dir = '/opt/ml/code/out/models'
-out_dir = '/opt/ml/code/out/submission'
 
-def submission(try_cnt: int, cat='', model_name=''):
-    submission = pd.read_csv(os.path.join(test_dir, 'info.csv'))
-    image_dir = os.path.join(test_dir, 'images')
-    model_path = os.path.join(model_dir, cat, model_name)
+# test_dir = '/opt/ml/input/data/eval'
+# model_dir = '/opt/ml/code/out/models'
+# out_dir = '/opt/ml/code/out/submission'
+
+def submission(expr_name: str, modelFrame: nn.Module, trained_model_name: str):
+    submission = pd.read_csv(os.path.join(testDataDir, 'info.csv'))
+    image_dir = os.path.join(testDataDir, 'images')
 
     # Test Dataset 클래스 객체를 생성하고 DataLoader를 만듭니다.
     image_paths = [os.path.join(image_dir, img_id) for img_id in submission.ImageID]
-    dataset = D.TestDataset(image_paths)
+    dataset = TestDataset(image_paths)
 
-    loader = DataLoader(
-        dataset,
-        shuffle=False
-    )
+    loader = get_loader(data_set=dataset, num_workers=1)
 
     # 모델을 정의합니다. (학습한 모델이 있다면 torch.load로 모델을 불러주세요!)
     device = torch.device('cuda')
-    model = M.get_model(cat).to(device)
-    checkpoint = torch.load(model_path)
-    model.load_state_dict(checkpoint)
-    
+    model = loadWithCheckpoint(modelFrame, trained_model_name).to(device)
     model.eval()
 
     # 모델이 테스트 데이터셋을 예측하고 결과를 저장합니다.
@@ -52,10 +50,10 @@ def submission(try_cnt: int, cat='', model_name=''):
     submission['ans'] = all_predictions
 
     # 제출할 파일을 저장합니다.
-    submission.to_csv(os.path.join(out_dir, f'submission_{str(try_cnt)}_{cat}.csv'), index=False)
+    now = datetime.datetime.now(timezone('Asia/Seoul'))
+    submission.to_csv(os.path.join(outSubmissionDir, f'submission_{expr_name}_{now}.csv'), index=False)
     print('test inference is done!')
 
 if __name__ == '__main__':
-    # submission(5, 'mask', 'ResNet_2021-08-25_13:40:44.180349.pt')
-    submission(5, 'age', 'ResNet_2021-08-26_03:48:17.512978+09:00.pt')
-    submission(5, 'gender', 'ResNet_2021-08-26_05:20:58.302954+09:00.pt')
+    modelFrame = getModel('MyResnet50')(num_classes=18)()
+    submission('Expr_Focal_Loss_Folded_Relay', modelFrame, 'Expr_Focal_Loss_Folded_Relay_2021-08-30_16:31:22.696706+09:00_.pt')

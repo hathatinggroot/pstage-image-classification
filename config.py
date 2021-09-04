@@ -9,6 +9,7 @@ modelDir = os.path.join(rootDir, "model")
 outDir = os.path.join(rootDir, "out")
 outLogsDir = os.path.join(outDir, "logs")
 outModelsDir = os.path.join(outDir, "models")
+checkpointsDir = os.path.join(outModelsDir, "checkpoints")
 outSubmissionDir = os.path.join(outDir, "submission")
 
 
@@ -22,6 +23,7 @@ trainDataImgPaths = np.array([[os.path.join(sub_dir, img) for img in os.listdir(
 ## test data
 testDataDir = os.path.join(dataDir, 'eval')
 testDataImgDir = os.path.join(testDataDir, 'images')
+testDataImgPaths = np.array([[os.path.join(sub_dir, img) for img in os.listdir(sub_dir) if not img.startswith('.')]  for sub_dir in trainDataImgSubDirs]).flatten()
 
 
 

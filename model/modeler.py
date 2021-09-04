@@ -21,9 +21,8 @@ def getModel(name: str) -> Union[nn.Module, m.ModelProvider]:
 
     return loadedModel
 
-def loadWithCheckpoint(name: str, checkpointName: str) -> nn.Module:
-    model = getModel(name)
-    checkpoint = torch.load(os.path.join(cf.outModelsDir, checkpointName))
+def loadWithCheckpoint(model, checkpointName: str) -> nn.Module:
+    checkpoint = torch.load(os.path.join(cf.checkpointsDir, checkpointName))
     model.load_state_dict(checkpoint)
 
     return model
